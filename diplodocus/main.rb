@@ -1,12 +1,13 @@
-#!/usr/bin/ruby2.2
+#!/usr/bin/ruby2
 
 require 'discordrb'
 
-bot = Discordrb::Bot.new token: '<TOKEN>', application_id: <app_id>
+bot = Discordrb::Bot.new token: '', application_id:
 
-awesomeregex = /(?:\b)(di|cri)([^\s]{3,})/i
+awesomeregex = /(?:\b)(di|dy|cri)(\S{3,}?)\b/i
 awesomeregexofnodoublon = /^([a-z])\1*(\1.*)$/
 lastmessagetime = -1
+messagesAnswered = {}
 
 #bot.message(in: "#general") do |event|
 bot.message() do |event|
@@ -19,16 +20,27 @@ bot.message() do |event|
         end
         if method == "cri"
             mess.upcase!
-        elsif method == "di"
+        elsif method == "di" or method == "dy"
             mess.capitalize!
         end
-        if /bizu/i.match(mess)
-            event.respond "JAMAIS JE NE MANQUERAI DE RESPECT À MON SEIGNEUR ET MAITRE!"
+        if /b[ilíìî|!*()\\\/][sz][uù]/i.match(mess)
+            message = message = event.respond "JAMAIS JE NE MANQUERAI DE RESPECT À MON SEIGNEUR ET MAITRE!"
+        elsif /^Rect$/.match(mess)
+            message = event.respond "GET REKT!"
+        elsif /^Sputes?$/.match(mess)
+            message = event.respond "PUTE!"
         else
-            event.respond mess
+            message = event.respond mess
         end
+        messagesAnswered[ event.message.id ] = message
     end
 end
 
+bot.message_edit() do |event|
+    mess = event.message
+    if messagesAnswered.key?(mess.id)
+        messagesAnswered[ mess.id ].edit(mess.author.display_name + " est lâche!")
+    end
+end
 bot.run
 
