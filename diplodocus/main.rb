@@ -4,7 +4,7 @@ require 'discordrb'
 
 tokenFile = File.open("token", "r")
 applicationIdFile = File.open("application_id", "r")
-bot = Discordrb::Bot.new token: tokenFile.read, application_id: applicationIdFile.read
+bot = Discordrb::Bot.new token: tokenFile.read.strip, client_id: applicationIdFile.read.to_i
 tokenFile.close
 applicationIdFile.close
 
