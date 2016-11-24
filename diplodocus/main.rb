@@ -17,7 +17,7 @@ messagesAnswered = {}
 
 #bot.message(in: "#general") do |event|
 bot.message() do |event|
-    if awesomeregex.match(event.content) && event.timestamp.to_i - lastmessagetime.to_i > 5 && !event.from_bot?
+    if rand(10) == 0 && awesomeregex.match(event.content) && event.timestamp.to_i - lastmessagetime.to_i > 5 && !event.from_bot?
         lastmessagetime = event.timestamp
         method = event.content[awesomeregex, 1].downcase
         mess = event.content[awesomeregex, 2]
@@ -42,9 +42,6 @@ bot.message() do |event|
     end
 end
 
-bot.message ({contains: /\bsbouvier/i}) do |event|
-    event.respond("Fragile...")
-end
 bot.message ({contains: /\balarm(?:er?|(é|ant)e?s?)?\b/i}) do |event|
     if event.timestamp.to_i - lastmessagetime.to_i > 5 && !event.from_bot?
         lastmessagetime = event.timestamp
