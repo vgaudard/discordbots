@@ -17,10 +17,10 @@ messagesAnswered = {}
 
 #bot.message(in: "#general") do |event|
 bot.message() do |event|
-    if rand(5) == 0 && awesomeregex.match(event.content) && event.timestamp.to_i - lastmessagetime.to_i > 5 && !event.from_bot?
-        lastmessagetime = event.timestamp
+    if awesomeregex.match(event.content) && event.timestamp.to_i - lastmessagetime.to_i > 5 && !event.from_bot?
         method = event.content[awesomeregex, 1].downcase
         mess = event.content[awesomeregex, 2]
+        send = true
         if awesomeregexofnodoublon.match(mess)
             mess = mess[awesomeregexofnodoublon, 2]
         end
@@ -38,9 +38,15 @@ bot.message() do |event|
         elsif /^jkstra$/i.match(mess)
             message = event.respond "jsk... jkst... jkj... Roy-Warshall!"
         else
-            message = event.respond mess
+            if  rand(5) == 0
+                message = event.respond mess
+                send = true
+            end
         end
-        messagesAnswered[ event.message.id ] = message
+        if send
+            lastmessagetime = event.timestamp
+            messagesAnswered[ event.message.id ] = message
+        end
     end
 end
 
