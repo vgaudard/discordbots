@@ -17,7 +17,7 @@ messagesAnswered = {}
 
 #bot.message(in: "#general") do |event|
 bot.message() do |event|
-    if rand(10) == 0 && awesomeregex.match(event.content) && event.timestamp.to_i - lastmessagetime.to_i > 5 && !event.from_bot?
+    if rand(5) == 0 && awesomeregex.match(event.content) && event.timestamp.to_i - lastmessagetime.to_i > 5 && !event.from_bot?
         lastmessagetime = event.timestamp
         method = event.content[awesomeregex, 1].downcase
         mess = event.content[awesomeregex, 2]
