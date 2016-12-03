@@ -35,6 +35,8 @@ bot.message() do |event|
             message = event.respond "GET REKT!"
         elsif /^Sputes?$/.match(mess)
             message = event.respond "PUTE!"
+        elsif /^jkstra$/i.match(mess)
+            message = event.respond "jsk... jkst... jkj... Roy-Warshall!"
         else
             message = event.respond mess
         end
