@@ -17,10 +17,10 @@ messagesAnswered = {}
 
 #bot.message(in: "#general") do |event|
 bot.message() do |event|
-    if awesomeregex.match(event.content) && event.timestamp.to_i - lastmessagetime.to_i > 5 && !event.from_bot?
+    if rand(5) == 0 && awesomeregex.match(event.content) && event.timestamp.to_i - lastmessagetime.to_i > 5 && !event.from_bot?
+        lastmessagetime = event.timestamp
         method = event.content[awesomeregex, 1].downcase
         mess = event.content[awesomeregex, 2]
-        send = true
         if awesomeregexofnodoublon.match(mess)
             mess = mess[awesomeregexofnodoublon, 2]
         end
@@ -29,24 +29,16 @@ bot.message() do |event|
         elsif method == "di" or method == "dy"
             mess.capitalize!
         end
-        if /[h_*][bВß][h_]*[ilѓíyÿŷўtḷýìʃjłťțîïļįİİiĵ|!*()\\\/][h_]*[szšžʒŝ][h_]*[u𝓾͕͗ǔŭйűѝüùųµūû]/i.match(mess)
+        if /b[ilíìî|!*()\\\/][sz][uù]/i.match(mess)
             message = message = event.respond "JAMAIS JE NE MANQUERAI DE RESPECT À MON SEIGNEUR ET MAITRE!"
         elsif /^Rect$/.match(mess)
             message = event.respond "GET REKT!"
         elsif /^Sputes?$/.match(mess)
             message = event.respond "PUTE!"
-        elsif /^jkstra$/i.match(mess)
-            message = event.respond "jsk... jkst... jkj... Roy-Warshall!"
         else
-            if  rand(5) == 0
-                message = event.respond mess
-                send = true
-            end
+            message = event.respond mess
         end
-        if send
-            lastmessagetime = event.timestamp
-            messagesAnswered[ event.message.id ] = message
-        end
+        messagesAnswered[ event.message.id ] = message
     end
 end
 
