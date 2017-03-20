@@ -11,6 +11,7 @@ applicationIdFile.close
 awesomeregex = /(?:\b)(di|dy|cri)(\S{3,}?)\b/i
 awesomeregexofnodoublon = /^([a-z])\1*(\1.*)$/
 merciregex = /(good|merci|nice|bien|cool|thx|thanks|thank|perfect|parfait|perf).*dip/i
+notregex = /not|pas/i
 lastmessagetime = -1
 
 thanks_answers = [  "Oh you! https://giphy.com/gifs/whatever-oh-you-uiVH8ETzr9nZm",
@@ -23,7 +24,6 @@ thanks_answers = [  "Oh you! https://giphy.com/gifs/whatever-oh-you-uiVH8ETzr9nZ
                     "Tu veux qu'on se retrouve après le travail ? https://s-media-cache-ak0.pinimg.com/originals/64/24/2f/64242f27f1afa3b669982c641e31bf62.jpg",
                     "Tu veux qu'on se retrouve après le travail ? http://images.halloweencostumes.com/products/32430/1-2/adult-al-gator-costume.jpg",
                     "Tu te fous de ma gueule, c'est ça ?",
-                    "https://cdn.drawception.com/images/panels/2012/9-28/Qwj94FKnPd-10.png",
                     "Gracias ! https://owncloud.vgaudard.com/index.php/apps/files_sharing/ajax/publicpreview.php?x=1366&y=322&a=true&file=gracias_dinosauro.png&t=FtNRWKa9T9nkb7o&scalingup=0",
                     "Ah! Je savais que ça allait te plaire.",
                     "Tu trouves ? https://cdn.drawception.com/images/panels/2015/3-28/Gdj3GYHa8C-5.png",
@@ -52,9 +52,11 @@ messagesAnswered = {}
 #bot.message(in: "#general") do |event|
 bot.message() do |event|
     if merciregex.match(event.content) && event.timestamp.to_i - lastmessagetime.to_i > 5 && !event.from_bot?
-        mess = thanks_answers.sample
-        event.respond mess
-        lastmessagetime = event.timestamp
+        if not notregex.match(event.content)
+            mess = thanks_answers.sample
+            event.respond mess
+            lastmessagetime = event.timestamp
+        end
     elsif awesomeregex.match(event.content) && event.timestamp.to_i - lastmessagetime.to_i > 5 && !event.from_bot?
         method = event.content[awesomeregex, 1].downcase
         mess = event.content[awesomeregex, 2]
