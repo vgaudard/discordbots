@@ -21,7 +21,7 @@ thanks_answers = [  "Oh you! https://giphy.com/gifs/whatever-oh-you-uiVH8ETzr9nZ
                     "Ouais, ça mérite au moins ça...",
                     "Je ne fais que mon travail... http://i3.kym-cdn.com/entries/icons/original/000/014/711/1380697092809.jpg",
                     "De rien, ma belle !",
-                    "Tu veux qu'on se retrouve après le travail ? http://www.excusememe.com/pics/imagebase/5099.gifs",
+                    "Tu veux qu'on se retrouve après le travail ? http://www.excusememe.com/pics/imagebase/5099.gif",
                     "Tu veux qu'on se retrouve après le travail ? https://s-media-cache-ak0.pinimg.com/originals/64/24/2f/64242f27f1afa3b669982c641e31bf62.jpg",
                     "Tu veux qu'on se retrouve après le travail ? http://images.halloweencostumes.com/products/32430/1-2/adult-al-gator-costume.jpg",
                     "Tu te fous de ma gueule, c'est ça ?",
