@@ -11,6 +11,7 @@ applicationIdFile.close
 awesomeregex = /(?:\b)(di|dy|cri)(\S{3,}?)\b/i
 awesomeregexofnodoublon = /^([a-z])\1*(\1.*)$/
 merciregex = /(good|merci|nice|bien|cool|thx|thanks|thank|perfect|parfait|perf).*dip/i
+tagueuleregex = /(ta gueule|tais toi|shut).*dip/i
 notregex = /not|pas/i
 perduregex = /(perdu|lost|lose|perdre)\b/i
 lastmessagetime = -1
@@ -67,9 +68,16 @@ losing_protection_picture = ["https://i.imgur.com/qecLpkU.gifv",
 # This should not be a problem unless the server stays on at all times, which it does now, but idc
 messagesAnswered = {}
 
+tagueuletime = 0
+
 #bot.message(in: "#general") do |event|
 bot.message() do |event|
-    if merciregex.match(event.content) && event.timestamp.to_i - lastmessagetime.to_i > 5 && !event.from_bot?
+    if event.timestamp.to_i < tagueuletime + 5 * 60
+        return
+    end
+    if tagueuleregex.match(event.content)
+        tagueuletime = event.timestamp.to_i
+    elsif merciregex.match(event.content) && event.timestamp.to_i - lastmessagetime.to_i > 5 && !event.from_bot?
         if not notregex.match(event.content)
             mess = thanks_answers.sample
             event.respond mess
