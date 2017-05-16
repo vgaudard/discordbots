@@ -13,7 +13,6 @@ awesomeregexofnodoublon = /^([a-z])\1*(\1.*)$/
 merciregex = /(good|merci|nice|bien|cool|thx|thanks|thank|perfect|parfait|perf).*dip/i
 tagueuleregex = /(ta gueule|tais toi|shut).*dip/i
 notregex = /not|pas/i
-perduregex = /(perdu|lost|lose|perdre)\b/i
 lastmessagetime = -1
 
 thanks_answers = [  "Oh you! https://giphy.com/gifs/whatever-oh-you-uiVH8ETzr9nZm",
@@ -48,23 +47,6 @@ thanks_answers = [  "Oh you! https://giphy.com/gifs/whatever-oh-you-uiVH8ETzr9nZ
                     "Tu crois que je fais ça pour toi ?",
                     "Ouais, je trouve aussi que c'était cool !"]
 
-losing_protection_message = ["We're not going to lose another soldier!",
-                             "Tenez bon !",
-                             "Il faut éviter ce massacre",
-                             "Fermez vos yeux !",
-                             "Je ne veux pas voir ça"]
-losing_protection_picture = ["https://i.imgur.com/qecLpkU.gifv",
-                             "https://i.imgur.com/n5yN6Uo.gifv",
-                             "https://i.imgur.com/lZEeZ8z.gifv",
-                             "https://i.imgur.com/sTVcGYc.gifv",
-                             "https://i.imgur.com/AGXXCNz.gifv",
-                             "https://i.redd.it/figdnt37g2dy.jpg",
-                             "https://i.imgur.com/arVW3Ie.jpg",
-                             "https://i.imgur.com/ZJh6DKq.gifv",
-                             "https://i.imgur.com/nO8rZ.gif",
-                             "https://i.imgur.com/KpeIJP0.gifv",
-                             "https://i.imgur.com/bSoPVAX.gifv"]
-
 # This should not be a problem unless the server stays on at all times, which it does now, but idc
 messagesAnswered = {}
 
@@ -72,7 +54,7 @@ tagueuletime = 0
 
 #bot.message(in: "#general") do |event|
 bot.message() do |event|
-    if event.timestamp.to_i < tagueuletime + 5 * 60
+    if event.timestamp.to_i < tagueuletime + 15 * 60
         return
     end
     if tagueuleregex.match(event.content)
@@ -81,12 +63,6 @@ bot.message() do |event|
         if not notregex.match(event.content)
             mess = thanks_answers.sample
             event.respond mess
-            lastmessagetime = event.timestamp
-        end
-    elsif perduregex.match(event.content) && event.timestamp.to_i - lastmessagetime.to_i > 5 && !event.from_bot?
-        if rand(5) == 0
-            event.respond losing_protection_message.sample
-            event.respond losing_protection_picture.sample
             lastmessagetime = event.timestamp
         end
     elsif awesomeregex.match(event.content) && event.timestamp.to_i - lastmessagetime.to_i > 5 && !event.from_bot?
