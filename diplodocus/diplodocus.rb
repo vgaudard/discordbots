@@ -78,7 +78,7 @@ bot.message() do |event|
             mess.capitalize!
         end
         if /b[ilíìî|!*()\\\/][sz][uù]/i.match(mess)
-            message = message = event.respond "JAMAIS JE NE MANQUERAI DE RESPECT À MON SEIGNEUR ET MAITRE!"
+            message = message = event.respond "Bizuth est un bizuth"
         elsif /^Rect$/.match(mess)
             message = event.respond "GET REKT!"
         elsif /^Sputes?$/.match(mess)
