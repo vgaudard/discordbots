@@ -3,12 +3,12 @@
 require '../root'
 
 reactbot = Bot.new
+imagepathregex = /\b([a-z]{4,128}\.(jpg|gif|png))\b/i
 
-reactbot.addMessageReaction(/^[a-z]{4,128}\.jpg$/i, lambda { |event|
-    puts event.content
-    path = 'images/' + event.content
+reactbot.addMessageReaction(imagepathregex, lambda { |event|
+    path = 'images/' + event.content[imagepathregex, 1]
     if File.exists? path
-        return Message.new(event.content, path)
+        return Message.new('', path)
     else
         return nil
     end

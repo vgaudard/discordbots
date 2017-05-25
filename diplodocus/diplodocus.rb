@@ -58,6 +58,6 @@ diplodocus.addMessageReaction(/\balarm(?:er?|(é|ant)e?s?)?\b/i, lambda { |event
 
 diplodocus.addMessageReaction(/b[ilíìî][sz][uù]/i, lambda { |event|
     return "JAMAIS JE NE MANQUERAI DE RESPECT À MON SEIGNEUR ET MAITRE!"
-}, 200)
+}, 200, 80)
 
 diplodocus.run
