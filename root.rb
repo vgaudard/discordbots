@@ -4,6 +4,7 @@ require 'discordrb'
 
 MessageEditReaction = Struct.new(:message, :reaction, :date)
 MessageReaction = Struct.new(:regex, :answerFunction, :priority, :probability, :editReactionFunction)
+Message = Struct.new(:caption, :filepath)
 
 class Bot
 
@@ -40,12 +41,27 @@ class Bot
                 end
             }
             date = event.timestamp.to_i
-            if (date < @tagueule_lasttime + @tagueule_defaultdelay) || (reaction == nil) || (date - @lastmessagetime < @message_delay) || (event.from_bot?) || (rand(100) == reaction.probability)
+            if (date < @tagueule_lasttime + @tagueule_defaultdelay) || (reaction == nil) || (date - @lastmessagetime < @message_delay) || (event.from_bot?) || (rand(100) > reaction.probability)
                 next
             end
             answer = reaction.answerFunction.call(event)
+            if answer == nil
+                next
+            end
             @lastmessagetime = date
-            message = event.respond(answer)
+            message = nil
+            if answer.is_a? String
+                answer = Message.new(answer, nil)
+            end
+            if answer.filepath != nil
+                puts "a"
+                file = File.open(answer.filepath)
+                message = event.send_file(file, caption: answer.caption)
+                file.close
+            else
+                puts "b"
+                message = event.respond(answer.caption)
+            end
             if reaction.editReactionFunction != nil
                 messageEditReaction = MessageEditReaction.new(message, reaction.editReactionFunction, Time.now)
                 @messagesAnswered[event.message.id] = messageEditReaction
