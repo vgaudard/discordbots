@@ -54,12 +54,10 @@ class Bot
                 answer = Message.new(answer, nil)
             end
             if answer.filepath != nil
-                puts "a"
                 file = File.open(answer.filepath)
                 message = event.send_file(file, caption: answer.caption)
                 file.close
             else
-                puts "b"
                 message = event.respond(answer.caption)
             end
             if reaction.editReactionFunction != nil
