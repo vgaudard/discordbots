@@ -1,3 +1,5 @@
+pkill diplodocus.rb
+pkill reacbot.rb
 cd diplodocus
 ./diplodocus.rb >> diplo.log 2>> diplo.error.log &
 cd ../reactbot
