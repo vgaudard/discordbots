@@ -9,7 +9,7 @@ authorizedUsers = JSON.parse(File.read("authorized_users.json"))
 
 imagepathregex = /\b([a-z]{4,128}\.(jpg|gif|png))\b/i
 reactbot.addMessageReaction(imagepathregex, lambda { |event|
-    path = File.join('images', event.content[imagepathregex, 1])
+    path = File.join('images', event.content[imagepathregex, 1].downcase)
     if File.exists? path
         return Message.new('', path)
     else
@@ -52,7 +52,7 @@ reactbot.addMessageReaction(reactbotCommandRegex, lambda { |event|
     when /^add\b/
         return "Bad format" unless reactbotAddImageRegex.match(command)
         url = command[reactbotAddImageRegex, 1]
-        name = command[reactbotAddImageRegex, 2]
+        name = command[reactbotAddImageRegex, 2].downcase
         authorid = event.author.id
         path = File.join("images", name)
         puts authorid.to_s + " trying to add " + url + " as " + name
@@ -68,7 +68,7 @@ reactbot.addMessageReaction(reactbotCommandRegex, lambda { |event|
         return "Image successfully added"
     when /^rm\b/
         return "Bad format" unless reactbotRmImageRegex.match(command)
-        name = command[reactbotRmImageRegex, 1]
+        name = command[reactbotRmImageRegex, 1].downcase
         path = File.join("images", name)
         authorid = event.author.id
         puts authorid.to_s + " trying to remove " + name
@@ -79,7 +79,7 @@ reactbot.addMessageReaction(reactbotCommandRegex, lambda { |event|
     when /^addlast\b/
         return "Bad format" unless reactbotAddLastImageRegex.match(command)
         return "No last url" unless lasturl != nil
-        name = command[reactbotAddLastImageRegex, 1]
+        name = command[reactbotAddLastImageRegex, 1].downcase
         authorid = event.author.id
         path = File.join("images", name)
         puts authorid.to_s + " trying to add " + lasturl + " as " + name
