@@ -7,9 +7,10 @@ reactbot = Bot.new
 
 authorizedUsers = JSON.parse(File.read("authorized_users.json"))
 
-imagepathregex = /\b([a-z]{4,128}\.(jpg|gif|png))\b/i
+imagepathregex = /\b(([a-z]{4,128})\.(jpg|gif|png))\b/i
+cutimagepathregex = /\b([a-z]{4,128})\b/
 reactbot.addMessageReaction(imagepathregex, lambda { |event|
-    path = File.join('images', event.content[imagepathregex, 1])
+    path = File.join('images', event.content[imagepathregex, 2])
     if File.exists? path
         return Message.new('', path)
     else
@@ -21,7 +22,6 @@ imageurlregex = /\b(https?:\/\/\S+\.(jpg|gif|png))\b/i
 lasturl = nil
 reactbot.addMessageReaction(imageurlregex, lambda { |event|
     lasturl = event.content[imageurlregex, 1]
-    puts "New url: " + lasturl
 }, 50)
 
 reactbot.addMessageReaction(//, lambda { |event|
@@ -55,11 +55,10 @@ reactbot.addMessageReaction(reactbotCommandRegex, lambda { |event|
         name = command[reactbotAddImageRegex, 2]
         authorid = event.author.id
         path = File.join("images", name)
-        puts authorid.to_s + " trying to add " + url + " as " + name
+        #puts authorid.to_s + " trying to add " + url + " as " + name
         return "Unauthorized user" unless authorizedUsers.any? { |user| user["id"] == authorid }
-        return "Invalid name" unless imagepathregex.match(name)
+        return "Invalid name" unless cutimagepathregex.match(name)
         return "Destination file already exists" if File.exists? path
-        puts "Adding"
         File.open(path, "wb") do | local_file |
             open(url, "rb") do | remote_file |
                 local_file.write(remote_file.read)
@@ -79,12 +78,12 @@ reactbot.addMessageReaction(reactbotCommandRegex, lambda { |event|
     when /^addlast\b/
         return "Bad format" unless reactbotAddLastImageRegex.match(command)
         return "No last url" unless lasturl != nil
-        name = command[reactbotAddLastImageRegex, 1]
+        name = command[reactbotAddLastImageRegex, 1][imagepathregex, 2]
         authorid = event.author.id
         path = File.join("images", name)
         puts authorid.to_s + " trying to add " + lasturl + " as " + name
         return "Unauthorized user" unless authorizedUsers.any? { |user| user["id"] == authorid }
-        return "Invalid name" unless imagepathregex.match(name)
+        return "Invalid name" unless cutimagepathregex.match(name)
         return "Destination file already exists" if File.exists? path
         puts "Adding"
         File.open(path, "wb") do | local_file |
