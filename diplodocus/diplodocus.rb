@@ -56,7 +56,7 @@ diplodocus.addMessageReaction(/\balarm(?:er?|(é|ant)e?s?)?\b/i, lambda { |event
         return "ALARME!\nhttps://www.youtube.com/watch?v=TqDsMEOYA9g"
 }, 200)
 
-diplodocus.addMessageReaction(/b[ilíìî][sz][uù]/i, lambda { |event|
+diplodocus.addMessageReaction(/dib[ilíìî][sz][uù]/i, lambda { |event|
     return "JAMAIS JE NE MANQUERAI DE RESPECT À MON SEIGNEUR ET MAITRE!"
 }, 200, 80)
 
