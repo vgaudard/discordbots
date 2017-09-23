@@ -9,9 +9,11 @@ bot = Bot.new(token, applicationId)
 require './ping/ping'
 require './ratelimiter/ratelimiter'
 require './tagueule/tagueule'
+require './diplodocus/diplodocus'
 
 bot.addPlugin Ping.new
 bot.addPlugin RateLimiter.new
 bot.addPlugin TaGueule.new
+bot.addPlugin Diplodocus.new
 
 bot.run
