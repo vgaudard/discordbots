@@ -18,4 +18,6 @@ class WritingClock
     def getTime(offset)
         return Time.now.getlocal(offset).strftime("%Hh%M")
     end
+
+    private :getTime
 end
