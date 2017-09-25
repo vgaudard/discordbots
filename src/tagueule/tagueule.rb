@@ -37,6 +37,5 @@ class TaGueule
                 "`!dip start`: enable reactions\n" + \
                 "`!dip pause [durations]`: pause reactions (durations in seconds, defaults to 15*60)\n"
         end
-        return ""
     end
 end

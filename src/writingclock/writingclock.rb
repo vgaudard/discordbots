@@ -12,8 +12,6 @@ class WritingClock
                 "<:kilt:356831960183603210>: `" + getTime('+01:00') + "`\n" + \
                 "<:nom:356747206822461440>: `"  + getTime('+02:00') + "`\n" + \
                 ":pizza:: `"                    + randomTime        + "`\n"
-        else
-            return ""
         end
     end
 

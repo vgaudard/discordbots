@@ -3,10 +3,6 @@
 ## Ping
 class Ping
     def reactTo(event)
-        if event.content == "ping"
-            return "pong"
-        else
-            return ""
-        end
+        return "pong" if event.content == "ping"
     end
 end

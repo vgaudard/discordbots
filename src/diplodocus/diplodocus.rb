@@ -28,9 +28,7 @@ class Diplodocus
     end
 
     def reactTo(event)
-        if !@awesomeJokeRegex.match event.content
-            return ""
-        end
+        return if !@awesomeJokeRegex.match event.content
         case event.content
         when /\bdirect\b/i
             return "GET REKT!"
@@ -41,16 +39,11 @@ class Diplodocus
         when /\bdib[il][sz][u]/i
             return "JAMAIS JE NE MANQUERAI DE RESPECT À MON SEIGNEUR ET MAITRE!"
         when @awesomeJokeRegex
-            if rand(100) > @defaultJokeProbability
-                return ""
-            end
-            method = $1
+            return if rand(100) > @defaultJokeProbability
+            method = $1.downcase
             response = $2
-            if method == "cr"
-                response.upcase!
-            elsif method == "d"
-                response.capitalize!
-            end
+            response.upcase! if method == "cr"
+            response.capitalize! if method == "d"
             return response
         end
     end

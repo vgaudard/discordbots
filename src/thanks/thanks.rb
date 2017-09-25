@@ -8,10 +8,6 @@ class Thanks
             /(good|merci|nice|bien|cool|thx|thank|perfect|parfait).*dip/i
     end
     def reactTo(event)
-        if @thanksRegex.match event.content
-            return @thanksAnswers.sample
-        else
-            return ""
-        end
+        return @thanksAnswers.sample if @thanksRegex.match event.content
     end
 end
