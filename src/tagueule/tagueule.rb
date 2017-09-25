@@ -17,12 +17,10 @@ class TaGueule
     end
 
     def allowedToSend
-        puts "TaGueule checking"
         return Time.now > @until && !@stopped
     end
 
     def reactTo(event)
-        puts "TaGueule trying to react"
         if @stopRegex.match event.content
             @stopped = true
         elsif @startRegex.match event.content

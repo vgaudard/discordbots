@@ -9,12 +9,10 @@ class RateLimiter
     end
 
     def allowedToSend
-        puts "RateLimiter checking"
         return Time.now > @lastMessageTime + @delay
     end
 
     def onMessageSent(event, response)
-        puts "RateLimiter notified"
         @lastMessageTime = Time.now
     end
 end
