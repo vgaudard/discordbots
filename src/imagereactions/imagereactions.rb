@@ -8,9 +8,9 @@ class ImageReactions
     end
 
     def reactTo(event)
-        if /^[a-z]{2,32}\.[a-z]{2,4}$/.match event.content
-            puts "Content looks like a file name"
-            return @imagesLinks[event.content] if @imagesLinks.has_key? event.content
+        downcaseContent = event.content.downcase
+        if /^[a-z]{2,32}\.[a-z]{2,4}$/.match downcaseContent
+            return @imagesLinks[downcaseContent] if @imagesLinks.has_key? downcaseContent
         end
         return ""
     end
