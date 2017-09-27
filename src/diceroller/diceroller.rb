@@ -3,8 +3,8 @@
 
 class DiceRoller
     def initialize
-        @diceRollCommandRegex = /^!roll (\S+$)/i
-        @dieRollRegex = /^(\d+)d(\d+)/i
+        @diceRollCommandRegex = /^!roll (\d+(?:d\d+))$/i
+        @dieRollRegex = /^(\d+)d(\d+)$/i
     end
 
     def reactTo(event)
@@ -16,6 +16,9 @@ class DiceRoller
         end
         rolls = parseAndRollDie(dice)
         return rolls[0].to_s if rolls.size == 1
+        if rolls.size == 0 || rolls[0].nil?
+            return "Vraiment ?"
+        end
         sum = 0
         returnedString = ""
         rolls.each_with_index do |roll, index|
