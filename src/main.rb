@@ -2,6 +2,8 @@
 
 require './bot'
 
+STDOUT.sync = true
+
 token = File.read("token").strip
 applicationId = File.read("application_id").to_i
 bot = Bot.new(token, applicationId)
