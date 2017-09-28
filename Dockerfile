@@ -10,10 +10,10 @@ RUN useradd --no-log-init --system --user-group discordbots
 
 RUN gem install discordrb
 
-COPY ./src/ /var/bots
-
 USER discordbots
 
 WORKDIR /var/bots/
+
+COPY ./src/ /var/bots
 
 CMD ./main.rb
