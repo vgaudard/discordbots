@@ -18,6 +18,7 @@ require './writingclock/writingclock'
 require './imagereactions/imagereactions'
 require './diceroller/diceroller'
 require './superuser/superuser'
+require './puppet/puppet'
 
 bot.addPlugin Ping.new
 bot.addPlugin RateLimiter.new
@@ -28,5 +29,6 @@ bot.addPlugin WritingClock.new
 bot.addPlugin ImageReactions.new
 bot.addPlugin DiceRoller.new
 bot.addPlugin Superuser.new secret
+bot.addPlugin Puppet.new
 
 bot.run
