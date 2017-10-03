@@ -31,7 +31,7 @@ class Diplodocus
         return if !@awesomeJokeRegex.match event.content
         case event.content
         when /\bdirect\b/i
-            return "GET REKT!"
+            return "GET REKT!" if rand(100) < @defaultJokeProbability
         when /\bdispute\b/i
             return "PUTE !"
         when /\bdijkstra\b/i
