@@ -42,6 +42,7 @@ class Diplodocus
             return if rand(100) > @defaultJokeProbability
             method = $1.downcase
             response = $2
+            response = response[@duplicateRegex, 2]
             response.upcase! if method == "cr"
             response.capitalize! if method == "d"
             return response
