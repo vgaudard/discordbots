@@ -1,4 +1,8 @@
 {
     "tree.jpg": "https://upload.wikimedia.org/wikipedia/commons/e/eb/Ash_Tree_-_geograph.org.uk_-_590710.jpg",
     "tench.jpg": "https://upload.wikimedia.org/wikipedia/commons/8/84/FemaleTench1.JPG"
+    "banana.jpg": [
+        "https://upload.wikimedia.org/wikipedia/commons/a/a0/Banana%2C_Congo.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg"
+        ]
 }
