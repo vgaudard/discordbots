@@ -11,8 +11,8 @@ class ImageReactions
         downcaseContent = event.content.downcase
         if /^[a-z]{2,32}\.[a-z]{2,4}$/.match downcaseContent
             if @imagesLinks.has_key? downcaseContent 
-                return @imagesLinks[downcaseContent].sample if @imagesLinks[downcaseContent].kind_of?(Array)
-                return @imagesLinks[downcaseContent] if not @imagesLinks[downcaseContent].kind_of?(Array)
+                return @imagesLinks[downcaseContent].sample if @imagesLinks[downcaseContent].respond_to?('sample')
+                return @imagesLinks[downcaseContent] if not @imagesLinks[downcaseContent].respond_to?('sample')
             end
         end
         return ""
