@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y	\
 
 RUN useradd --no-log-init --system --user-group discordbots
 
-RUN gem install discordrb
+RUN gem install discordrb fssm
 
 USER discordbots
 

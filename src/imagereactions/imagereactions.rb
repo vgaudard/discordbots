@@ -1,10 +1,19 @@
 #!/usr/bin/ruby
 
+require 'fssm'
+
 # This can very reasonably be used for things other than images
 class ImageReactions
     def initialize imagesPath
         @imagesPath = imagesPath
         reloadImages
+        Thread.new (self) {|ir|
+            FSSM.monitor(File.dirname(imagesPath)) do
+                update do ||
+                    ir.reloadImages
+                end
+            end
+        }
     end
 
     def reloadImages
@@ -13,7 +22,6 @@ class ImageReactions
     end
 
     def reactTo(event)
-        reloadImages if event.content == "!reloadImages"
         downcaseContent = event.content.downcase
         if /^[a-z]{2,32}\.[a-z]{2,4}$/.match downcaseContent
             if @imagesLinks.has_key? downcaseContent 
