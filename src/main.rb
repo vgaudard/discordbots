@@ -11,6 +11,8 @@ end
 token = readConfig("token")
 application_id = readConfig("application_id").to_i
 secret = readConfig("secret")
+images = readConfig("images.json")
+mentionsPath = File.join(ENV['DISCORDBOTS_CONFIG_PATH'], "mentions.json")
 
 bot = Bot.new(token, application_id)
 
@@ -24,8 +26,7 @@ require './imagereactions/imagereactions'
 require './diceroller/diceroller'
 require './superuser/superuser'
 require './puppet/puppet'
-
-images = readConfig("images.json")
+require './mentions/mentions'
 
 bot.addPlugin Ping.new
 bot.addPlugin RateLimiter.new
@@ -37,6 +38,7 @@ bot.addPlugin ImageReactions.new images
 bot.addPlugin DiceRoller.new
 bot.addPlugin Superuser.new secret
 bot.addPlugin Puppet.new
+bot.addPlugin Mentions.new mentionsPath
 
 bot.run
 
