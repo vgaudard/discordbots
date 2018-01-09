@@ -4,15 +4,18 @@ require './bot'
 
 STDOUT.sync = true
 
+def getConfigPath param
+    return File.join(ENV['DISCORDBOTS_CONFIG_PATH'], param)
+end
 def readConfig param
-    return File.read(File.join(ENV['DISCORDBOTS_CONFIG_PATH'], param)).strip
+    return File.read(getConfigPath(param)).strip
 end
 
 token = readConfig("token")
 application_id = readConfig("application_id").to_i
 secret = readConfig("secret")
-images = readConfig("images.json")
-mentionsPath = File.join(ENV['DISCORDBOTS_CONFIG_PATH'], "mentions.json")
+imagesPath = getConfigPath("images.json")
+mentionsPath = getConfigPath("mentions.json")
 
 bot = Bot.new(token, application_id)
 
@@ -34,7 +37,7 @@ bot.addPlugin TaGueule.new
 bot.addPlugin Diplodocus.new
 bot.addPlugin Thanks.new
 bot.addPlugin WritingClock.new
-bot.addPlugin ImageReactions.new images
+bot.addPlugin ImageReactions.new imagesPath
 bot.addPlugin DiceRoller.new
 bot.addPlugin Superuser.new secret
 bot.addPlugin Puppet.new
