@@ -1,7 +1,2 @@
-token
-application_id
 *.log
-reactbot/images/
-authorized_users.json
-images.json
-secret
+config/

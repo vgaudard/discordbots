@@ -3,8 +3,8 @@
 require 'discordrb'
 
 class Bot
-    def initialize(token, applicationId)
-        @discordBot = Discordrb::Bot.new token: token, client_id: applicationId
+    def initialize(token, application_id)
+        @discordBot = Discordrb::Bot.new token: token, client_id: application_id
         @plugins = Array.new
 
         @discordBot.message do |event|

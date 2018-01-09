@@ -2,9 +2,8 @@
 
 # This can very reasonably be used for things other than images
 class ImageReactions
-    def initialize()
-        imagesFilePath = File.join(File.dirname(__FILE__), "images.json")
-        @imagesLinks = JSON.parse(File.read(imagesFilePath))
+    def initialize images
+        @imagesLinks = JSON.parse images
     end
 
     def reactTo(event)
@@ -15,6 +14,5 @@ class ImageReactions
                 return @imagesLinks[downcaseContent] if not @imagesLinks[downcaseContent].respond_to?('sample')
             end
         end
-        return ""
     end
 end
