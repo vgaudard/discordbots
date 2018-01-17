@@ -1,9 +1,8 @@
 #!/usr/bin/ruby
 
 class Thanks
-    def initialize()
-        thanksFilePath = File.join(File.dirname(__FILE__), "thanks.json")
-        @thanksAnswers = JSON.parse(File.read(thanksFilePath))
+    def initialize thanksPath
+        @thanksAnswers = JSON.parse(File.read(thanksPath))
         @thanksRegex =
             /(good|merci|nice|bien|cool|thx|thank|perfect|parfait).*dip/i
     end
