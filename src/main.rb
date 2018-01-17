@@ -1,6 +1,6 @@
 #!/usr/bin/ruby
 
-require './bot'
+require_relative 'bot'
 
 STDOUT.sync = true
 
@@ -20,17 +20,7 @@ thanksPath = getConfigPath("thanks.json")
 
 bot = Bot.new(token, application_id)
 
-require './ping/ping'
-require './ratelimiter/ratelimiter'
-require './tagueule/tagueule'
-require './diplodocus/diplodocus'
-require './thanks/thanks'
-require './writingclock/writingclock'
-require './imagereactions/imagereactions'
-require './diceroller/diceroller'
-require './superuser/superuser'
-require './puppet/puppet'
-require './mentions/mentions'
+Dir[File.join(File.dirname(__FILE__), "plugins", "*.rb")].each {|file| require_relative file }
 
 bot.addPlugin Ping.new
 bot.addPlugin RateLimiter.new

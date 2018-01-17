@@ -1,6 +1,6 @@
 #!/usr/bin/ruby
 
-require './superuser/superuser'
+require_relative 'superuser'
 
 class Puppet
     def initialize
