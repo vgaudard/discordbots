@@ -48,7 +48,7 @@ class Mentions
             end
         when /@([a-z-]+)/i
             groupName = $1.downcase
-            return @groups[serverID][groupName].map { |id| "<@#{id}>" }.join(" ") if @groups[serverID].has_key? groupName
+            return @groups[serverID][groupName].select{|id| id != authorID}.map { |id| "<@#{id}>" }.join(" ") if @groups[serverID].has_key? groupName
         end
     end
 end
