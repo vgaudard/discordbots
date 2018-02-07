@@ -17,6 +17,7 @@ secret = readConfig("secret")
 imagesPath = getConfigPath("images.json")
 mentionsPath = getConfigPath("mentions.json")
 thanksPath = getConfigPath("thanks.json")
+timePath = getConfigPath("time.json")
 
 bot = Bot.new(token, application_id)
 
@@ -27,7 +28,7 @@ bot.addPlugin RateLimiter.new
 bot.addPlugin TaGueule.new
 bot.addPlugin Diplodocus.new
 bot.addPlugin Thanks.new thanksPath
-bot.addPlugin WritingClock.new
+bot.addPlugin WritingClock.new timePath
 bot.addPlugin ImageReactions.new imagesPath
 bot.addPlugin DiceRoller.new
 bot.addPlugin Superuser.new secret
