@@ -18,6 +18,7 @@ imagesPath = getConfigPath("images.json")
 mentionsPath = getConfigPath("mentions.json")
 thanksPath = getConfigPath("thanks.json")
 timePath = getConfigPath("time.json")
+pinsPath = getConfigPath("pins.json")
 
 bot = Bot.new(token, application_id)
 
@@ -34,6 +35,7 @@ bot.addPlugin DiceRoller.new
 bot.addPlugin Superuser.new secret
 bot.addPlugin Puppet.new
 bot.addPlugin Mentions.new mentionsPath
+bot.addPlugin Pin.new pinsPath
 
 bot.run
 
