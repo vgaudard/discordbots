@@ -49,7 +49,7 @@ class Mentions
             end
         when /@([a-z-]+)/i # When someone mentions a group (in the form @groupname), we mention all participants in the group
             groupName = $1.downcase
-            return @groups[serverID][groupName].map { |id| "<@#{id}>" }.join(" ") + " bizuth est nul" if @groups[serverID].has_key? groupName
+            return @groups[serverID][groupName].map { |id| "<@#{id}>" }.join(" ") if @groups[serverID].has_key? groupName
         end
     end
 end
