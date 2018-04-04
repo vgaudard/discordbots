@@ -2,6 +2,7 @@
 
 require 'json'
 
+# Adds !pingme functionality, as specified in the project design documents
 class Mentions
     def initialize mentionsPath
         @mentionsPath = mentionsPath
@@ -46,9 +47,9 @@ class Mentions
             else
                 return "No group in this server"
             end
-        when /@([a-z-]+)/i
+        when /@([a-z-]+)/i # When someone mentions a group (in the form @groupname), we mention all participants in the group
             groupName = $1.downcase
-            return @groups[serverID][groupName].select{|id| id != authorID}.map { |id| "<@#{id}>" }.join(" ") if @groups[serverID].has_key? groupName
+            return @groups[serverID][groupName].map { |id| "<@#{id}>" }.join(" ") if @groups[serverID].has_key? groupName
         end
     end
 end
