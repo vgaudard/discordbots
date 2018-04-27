@@ -36,6 +36,7 @@ bot.addPlugin Superuser.new secret
 bot.addPlugin Puppet.new
 bot.addPlugin Mentions.new mentionsPath
 bot.addPlugin Pin.new pinsPath
+bot.addPlugin Josie.new
 
 bot.run
 
