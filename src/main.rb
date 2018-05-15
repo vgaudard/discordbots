@@ -37,6 +37,7 @@ bot.addPlugin Puppet.new
 bot.addPlugin Mentions.new mentionsPath
 bot.addPlugin Pin.new pinsPath
 bot.addPlugin Josie.new
+bot.addPlugin Kaamelott.new
 
 bot.run
 
