@@ -41,9 +41,16 @@ class Mentions
             @groups[serverID].delete groupName if @groups[serverID][groupName].empty?
             puts "Removed #{event.author.username} (#{authorID}) from group #{groupName}"
             updateFile
+            return
         when /^!listgroups$/i
             if @groups.has_key? serverID
                 return @groups[serverID].keys.join(", ")
+            else
+                return "No group in this server"
+            end
+        when /^!mygroups$/i
+            if @groups.has_key? serverID
+                return @groups[serverID].select{|group, members|  members.include? authorID}.keys.join(", ")
             else
                 return "No group in this server"
             end
