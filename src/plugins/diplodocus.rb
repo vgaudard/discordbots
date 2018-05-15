@@ -32,6 +32,8 @@ class Diplodocus
         case event.content
         when /\bdirect\b/i
             return "GET REKT!" if rand(100) < @defaultJokeProbability
+        when /\bdiffé/i
+            return # This word is used too often to be funny
         when /\bdispute\b/i
             return "PUTE !"
         when /\bdijkstra\b/i
