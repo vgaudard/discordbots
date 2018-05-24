@@ -6,7 +6,7 @@
 class Diplodocus
     def initialize()
         # Probability to send the joke on a simple pattern
-        @defaultJokeProbability = 40
+        @defaultJokeProbability = 30
 
         # Regex explanation
         # \b            matches start of word
@@ -31,7 +31,7 @@ class Diplodocus
         return if !@awesomeJokeRegex.match event.content
         case event.content
         when /\bdirect\b/i
-            return "GET REKT!" if rand(100) < @defaultJokeProbability
+            return "GET REKT!" if rand(100) > @defaultJokeProbability / 2
         when /\bdiffé/i
             return # This word is used too often to be funny
         when /\bdispute\b/i
@@ -44,7 +44,9 @@ class Diplodocus
             return if rand(100) > @defaultJokeProbability
             method = $1.downcase
             response = $2
-            response = response[@duplicateRegex, 2]
+            puts response
+            response = response[@duplicateRegex, 2] if @duplicateRegex.match response
+            puts response
             response.upcase! if method == "cr"
             response.capitalize! if method == "d"
             return response
