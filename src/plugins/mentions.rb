@@ -25,7 +25,7 @@ class Mentions
         authorID = event.author.id
         serverID = event.server.id.to_s
         case event.content
-        when /^!pingme ([a-z-]+)$/i
+        when /^!pingme ((?:\p{L}|\p{N}|[_-])+)$/i
             groupName = $1.downcase
             @groups[serverID] = Hash.new if not @groups.has_key? serverID
             @groups[serverID][groupName] = Array.new if not @groups[serverID].has_key? groupName
@@ -33,7 +33,7 @@ class Mentions
             puts "Added #{event.author.username} (#{authorID}) to group #{groupName}"
             updateFile
             return
-        when /^!leaveme ([a-z-]+)$/i
+        when /^!leaveme ((?:\p{L}|\p{N}|[_-])+)$/i
             groupName = $1.downcase
             return if not @groups.has_key? serverID
             return if not @groups[serverID].has_key? groupName
@@ -54,7 +54,7 @@ class Mentions
             else
                 return "No group in this server"
             end
-        when /@([a-z-]+)/i # When someone mentions a group (in the form @groupname), we mention all participants in the group
+        when /@((?:\p{L}|\p{N}|[_-])+)/i # When someone mentions a group (in the form @groupname), we mention all participants in the group
             groupName = $1.downcase
             return @groups[serverID][groupName].map { |id| "<@#{id}>" }.join(" ") if @groups[serverID].has_key? groupName
         end
