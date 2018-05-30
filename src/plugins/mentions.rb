@@ -4,6 +4,7 @@ require 'json'
 
 # Adds !pingme functionality, as specified in the project design documents
 class Mentions
+    DISCORD_MESSAGE_LENGTH_LIMIT = 2000
     def initialize mentionsPath
         @mentionsPath = mentionsPath
         if File.exist? mentionsPath
@@ -43,14 +44,29 @@ class Mentions
             updateFile
             return
         when /^!listgroups$/i
+            grouplist = @groups[serverID].keys.join(",")
             if @groups.has_key? serverID
-                return @groups[serverID].keys.join(", ")
+                if grouplist.length < DISCORD_MESSAGE_LENGTH_LIMIT
+                    return grouplist
+                else
+                    grouplist = @groups[serverID].select{|group, members| members.length > 1}.keys.join(",")
+                    if grouplist.length < DISCORD_MESSAGE_LENGTH_LIMIT and grouplist.length != 0
+                        return "TROP DE PUISSANCE !!!\nVoilà juste quelques groupes :\n" + grouplist
+                    else
+                        return "**BEAUCOUP TROP DE PUISSANCE ICI !!!!! JE NE VAIS PAS TENIR !!!**"
+                    end
+                end
             else
                 return "No group in this server"
             end
         when /^!mygroups$/i
+            grouplist = @groups[serverID].select{|group, members|  members.include? authorID}.keys.join(", ")
             if @groups.has_key? serverID
-                return @groups[serverID].select{|group, members|  members.include? authorID}.keys.join(", ")
+                if grouplist.length < DISCORD_MESSAGE_LENGTH_LIMIT
+                    return grouplist
+                else
+                    return "**TROP DE PUISSANCE**"
+                end
             else
                 return "No group in this server"
             end
